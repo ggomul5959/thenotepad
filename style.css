@@ -35,7 +35,7 @@ header {
 .tarea {
     width: 98%;
     height: auto; /* 변경된 부분 */
-    min-height: 600px; /* 추가된 부분 */
+    min-height: 1000px; /* 추가된 부분 */
     background: #faf5be;
     border: 1px solid #ccc;
     font-size: 16px;
