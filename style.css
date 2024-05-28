@@ -1,0 +1,80 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+}
+
+.logo {
+    width: 150px;
+    text-align: center;
+    line-height: 50px;
+    border: 0px solid #000;
+    margin: 0 auto;
+}
+#fontSizeInput{
+    width: 65px;
+    text-align: center;
+    line-height: 5px;
+    border: 1px solid #000;
+    margin: 0 auto;
+}
+#toggleFontWeightButton{
+    text-align: center;
+    line-height: 13px;
+
+}
+#content {
+    padding: 20px;
+}
+
+.tarea {
+    width: 98%;
+    height: auto; /* 변경된 부분 */
+    min-height: 600px; /* 추가된 부분 */
+    background: #faf5be;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 8px 10px 2px 50px;
+    line-height: 25px;
+    box-shadow: 0 1px 3px #b6b6b6;
+    position: relative;
+    overflow: auto;
+    white-space: pre-wrap;
+    margin-top: 25px;
+}
+.tarea::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 45px;
+    width: 3px;
+    height: 100%; /* 변경된 부분 */
+    background: #f131318f;
+}
+
+.tarea::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 25px); /* 변경된 부분 */
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 23px,
+        #666 23px,
+        #666 25px
+    );
+}
+
+#footer {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+}
