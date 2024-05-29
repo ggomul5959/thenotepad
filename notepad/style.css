@@ -7,23 +7,68 @@ html, body {
 }
 
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 50px;
-    border-bottom: 1px solid #ccc;
-    padding: 0 20px;
-    box-sizing: border-box;
+    text-align: center;
+    padding: 15px;
+    background-color: #444; 
+    color: white;
+    flex-shrink: 0;
+    position: relative;
 }
 
-.logo {
-    text-align: center;
-    line-height: 50px;
-    line-height: 50px;
-    border: 0px solid #000;
-    margin: 0 auto;
+h1 {
+    margin: 0;
+    font-size: 2em;
 }
+nav {
+    margin-top: 20px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu > li {
+    position: relative;
+    margin: 0 15px;
+}
+
+.menu > li > a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    display: block;
+}
+
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #555;
+}
+
+.submenu > li > a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+
+.submenu > li > a:hover {
+    background-color: #666;
+}
+
+/* 드롭다운 메뉴 보이기 */
+.menu > li:hover .submenu {
+    display: block;
+}
+
 
 .controls {
     display: flex;
@@ -108,3 +153,4 @@ footer .ads {
     display: flex;
     justify-content: flex-end;
 }
+
