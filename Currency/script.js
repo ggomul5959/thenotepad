@@ -1,52 +1,35 @@
-async function fetchExchangeRates() {
-    try {
-        const response = await fetch('https://api.exchangeratesapi.io/latest');
-        const data = await response.json();
-        return data.rates;
-    } catch (error) {
-        console.error('Error fetching exchange rates:', error);
-        return {};
+var tipsByType = {
+    'Excellent': [],
+    'Good': [],
+    'Fair': [],
+    'Poor': []
+};
+
+function calculateTip() {
+    var totalBill = parseFloat(document.getElementById("totalBill").value);
+    var tipPercentage = parseFloat(document.getElementById("tipPercentage").value);
+    var tipType = document.getElementById("tipType").value;
+
+    if (isNaN(totalBill) || isNaN(tipPercentage)) {
+        alert("Please enter valid numbers.");
+        return;
     }
+
+    var tipAmount = totalBill * (tipPercentage / 100);
+    var totalAmount = totalBill + tipAmount;
+
+    tipsByType[tipType].push(tipPercentage);
+
+    var averageTip = calculateAverageTip(tipsByType[tipType]);
+
+    document.getElementById("tipAmount").innerHTML = "Tip: $" + tipAmount.toFixed(2) + "<br>Total Amount: $" + totalAmount.toFixed(2);
+    document.getElementById("averageTip").innerHTML = tipType + " Average Tip: " + averageTip.toFixed(2) + "%";
 }
 
-async function fetchCurrencies() {
-    const currencies = ['KRW', 'JPY', 'CNY', 'USD', 'EUR']; // 변환할 통화 목록
-
-    const selectFrom = document.getElementById('fromCurrency');
-    const selectTo = document.getElementById('toCurrency');
-
-    currencies.forEach(currency => {
-        const option1 = document.createElement('option');
-        option1.text = currency;
-        option1.value = currency;
-        const option2 = document.createElement('option');
-        option2.text = currency;
-        option2.value = currency;
-        selectFrom.add(option1);
-        selectTo.add(option2);
-    });
-}
-
-async function convert() {
-    const amount = parseFloat(document.getElementById('amount').value);
-    const fromCurrency = document.getElementById('fromCurrency').value;
-    const toCurrency = document.getElementById('toCurrency').value;
-
-    const exchangeRates = await fetchExchangeRates();
-
-    const fromRate = exchangeRates[fromCurrency];
-    const toRate = exchangeRates[toCurrency];
-
-    if (fromRate && toRate) {
-        const exchangeRate = toRate / fromRate;
-        const result = amount * exchangeRate;
-
-        document.getElementById('result').innerText = `${amount} ${fromCurrency} = ${result.toFixed(2)} ${toCurrency}`;
-    } else {
-        console.error('Invalid currency.');
+function calculateAverageTip(tipArray) {
+    var total = 0;
+    for (var i = 0; i < tipArray.length; i++) {
+        total += tipArray[i];
     }
+    return total / tipArray.length;
 }
-
-document.getElementById('convertButton').addEventListener('click', convert);
-
-fetchCurrencies();
