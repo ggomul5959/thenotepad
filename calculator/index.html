@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-5748042614242481">
-    <title>My Toolbar</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <script src="scripts.js" defer></script>
+    <script src="script.js" defer></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5748042614242481"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 </head>
+
 <body>
     <header>
-        <h1>My Toolbar</h1>
+        <h1>Calculator</h1>
         <nav>
             <ul class="menu">
                 <li>
@@ -37,29 +38,36 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <section>
-            <h2></h2>
-            <ul>
-                
-                <!-- 다른 노트 관련 링크 추가 가능 -->
-            </ul>
-        </section>
-        <section>
-            <h2>Calculator</h2>
-            <ul>
-                <li><a href="../calculator/index.html" target="_blank">Calculator</a></li>
-                <li><a href="#" target="_blank">Bmi calculator</a></li>
-                <!-- 다른 유틸리티 관련 링크 추가 가능 -->
-            </ul>
-        </section>
-        <section>
-            <h2>Etc Category</h2>
-            <ul>
-                <li><a href="../note/index.html" target="_blank">Notepad</a></li>
-                    <!-- 다른 노트 관련 링크 추가 가능 -->
-            </ul>
-        </section>
-    </main>
+    <div class="save">
+        <div id="history" class="history"></div>
+    </div>           
+    
+
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="expression" class="expression" readonly>
+            <input type="text" id="result" class="result" readonly>
+        </div>
+        <div class="buttons">
+            <button onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="clearDisplay()">C</button>
+        </div>
+    </div>
 </body>
 </html>
+
