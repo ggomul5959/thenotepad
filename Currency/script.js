@@ -1,4 +1,4 @@
-asyasync function fetchExchangeRates() {
+async function fetchExchangeRates() {
     try {
         const response = await fetch('https://api.exchangeratesapi.io/latest');
         const data = await response.json();
