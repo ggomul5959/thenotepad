@@ -6,21 +6,22 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #f4f4f4;
-
 }
+
 header {
     text-align: center;
-    padding: 20px 100%;
+    padding: 20px 10%; /* Adjusted padding */
     background-color: #444; 
     color: white;
     flex-shrink: 0;
-    position: relative;
-
+    width: 100%;
 }
+
 h1 {
     margin: 0;
     font-size: 2em;
 }
+
 nav {
     margin-top: 20px;
 }
@@ -66,22 +67,23 @@ nav {
     background-color: #666;
 }
 
-/* 드롭다운 메뉴 보이기 */
+/* Dropdown menu display */
 .menu > li:hover .submenu {
     display: block;
 }
 
-.calculator {
+.calculator, .save {
     border: 2px solid #ccc;
     border-radius: 5px;
     padding: 20px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px; /* 계산기의 너비를 조정합니다. */
-    position: fixed;
+    width: 90%; /* Adjusted width for responsiveness */
+    max-width: 400px; /* Added max-width */
+    position: absolute; /* Changed to absolute positioning */
     top: 50%;
-    right: 40%;
-    transform: translate(50%, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centering */
 }
 
 .display {
@@ -90,37 +92,20 @@ nav {
     background-color: #f9f9f9;
     border-radius: 5px;
 }
-.save{
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px; /* 계산기의 너비를 조정합니다. */
-    position: fixed;
-    top: 50%;
-    right: 70%;
-    transform: translate(50%, -50%);
-}
-.expression, .result {
-    width: calc(100% - 20px); /* 패딩 고려 */
-    padding: 5px;
-    font-size: 1.2em;
-    margin-bottom: 5px;
-}
+
 .history {
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 5px;
-    overflow-y: auto; /* 내용이 넘칠 때 스크롤 표시 */
-    max-height: 200px; /* 최대 높이 지정 */
-
+    overflow-y: auto; /* Scrollbar when content exceeds */
+    max-height: 200px;
 }
 
 .history div {
     margin-bottom: 5px;
     font-size: 1.1em;
 }
+
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -144,4 +129,16 @@ button:hover {
 
 button:active {
     transform: translateY(1px);
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    header {
+        padding: 20px 5%; /* Adjusted padding */
+    }
+
+    .calculator, .save {
+        width: 95%; /* Adjusted width */
+        max-width: none; /* Remove max-width */
+    }
 }
