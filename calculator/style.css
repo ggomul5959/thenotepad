@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+
+}
+header {
+    text-align: center;
+    padding: 20px 100%;
+    background-color: #444; 
+    color: white;
+    flex-shrink: 0;
+    position: relative;
+
+}
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+nav {
+    margin-top: 20px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu > li {
+    position: relative;
+    margin: 0 15px;
+}
+
+.menu > li > a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    display: block;
+}
+
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #555;
+}
+
+.submenu > li > a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+
+.submenu > li > a:hover {
+    background-color: #666;
+}
+
+/* 드롭다운 메뉴 보이기 */
+.menu > li:hover .submenu {
+    display: block;
+}
+
+.calculator {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px; /* 계산기의 너비를 조정합니다. */
+    position: fixed;
+    top: 50%;
+    right: 40%;
+    transform: translate(50%, -50%);
+}
+
+.display {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+.save{
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px; /* 계산기의 너비를 조정합니다. */
+    position: fixed;
+    top: 50%;
+    right: 70%;
+    transform: translate(50%, -50%);
+}
+.expression, .result {
+    width: calc(100% - 20px); /* 패딩 고려 */
+    padding: 5px;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+.history {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    overflow-y: auto; /* 내용이 넘칠 때 스크롤 표시 */
+    max-height: 200px; /* 최대 높이 지정 */
+
+}
+
+.history div {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+}
+
+button {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    transform: translateY(1px);
+}
