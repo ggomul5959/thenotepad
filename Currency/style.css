@@ -1,4 +1,3 @@
-/* 기본 스타일 */
 body {
     margin: 0;
     padding: 0;
@@ -73,51 +72,51 @@ nav {
 .menu > li:hover .submenu {
     display: block;
 }
-.converter {
+.container {
     border: 2px solid #ccc;
     border-radius: 5px;
     padding: 20px;
-    background-color: #ccc;
+    background-color:#ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 600px;
+    max-width: 400px;
     position: relative;
     top: 20%;
-    transform: translateY(30%);
+    transform: translateY(50%);
 }
 
-.input-fields {
+.input-group {
     margin-bottom: 15px;
 }
 
-.amount-input, .currency-from, .currency-to {
-    margin-bottom: 10px;
+label {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
 }
 
-input[type="number"], select {
-    width: 100px;
+input {
+    width: 200px;
     padding: 5px;
-    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 button {
     padding: 10px 20px;
     background-color: #007bff;
-    color: white;
+    color: #fff;
     border: none;
-    border-radius: 
-    5px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.result {
-    margin-top: 10px;
-    font-weight: bold;
-    text-align: left;
+button:hover {
+    background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
-    .converter {
-        width: 90%;
-    }
+#tipAmount {
+    margin-top: 20px;
+    font-size: 18px;
 }
+
