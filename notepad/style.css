@@ -1,41 +1,60 @@
 html, body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 50px;
     border-bottom: 1px solid #ccc;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .logo {
-    width: 150px;
     text-align: center;
+    line-height: 50px;
     line-height: 50px;
     border: 0px solid #000;
     margin: 0 auto;
 }
-#fontSizeInput{
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    margin-right: 10px;
+}
+
+#fontSizeInput {
     width: 65px;
     text-align: center;
-    line-height: 5px;
     border: 1px solid #000;
-    margin: 0 auto;
+    margin-right: 10px;
 }
-#toggleFontWeightButton{
-    text-align: center;
-    line-height: 13px;
 
+#toggleFontWeightButton {
+    text-align: center;
 }
+
 #content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .tarea {
-    width: 98%;
-    height: auto; /* 변경된 부분 */
-    min-height: 1000px; /* 추가된 부분 */
+    flex: 1;
     background: #faf5be;
     border: 1px solid #ccc;
     font-size: 16px;
@@ -47,13 +66,14 @@ header {
     white-space: pre-wrap;
     margin-top: 25px;
 }
+
 .tarea::before {
     content: "";
     position: absolute;
     top: 0;
     left: 45px;
     width: 3px;
-    height: 100%; /* 변경된 부분 */
+    height: 100%;
     background: #f131318f;
 }
 
@@ -63,7 +83,7 @@ header {
     top: 7px;
     left: 0;
     width: 100%;
-    height: calc(100% - 25px); /* 변경된 부분 */
+    height: calc(100% - 25px);
     background: repeating-linear-gradient(
         to bottom,
         transparent,
@@ -73,8 +93,18 @@ header {
     );
 }
 
-#footer {
-    text-align: center;
-    font-size: 12px;
-    color: #666;
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    border-top: 1px solid #ccc;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+footer .ads {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 }
