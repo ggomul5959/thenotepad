@@ -2,7 +2,7 @@ async function fetchExchangeRates() {
     const API_KEY = 'lKtQiWfhqrvEn6LD3CL5p7d3fDKb0KOV'; // 여기에 발급받은 API 키를 넣어주세요
 
     try {
-        const response = await fetch(`https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkeylKtQiWfhqrvEn6LD3CL5p7d3fDKb0KOV&searchdate=20240523&data=AP01`);
+        const response = await fetch(`https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=AUTHKEYlKtQiWfhqrvEn6LD3CL5p7d3fDKb0KOV&searchdate=20180102&data=AP01`);
         const data = await response.json();
         return data;
     } catch (error) {
