@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Currency Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Calculator</h1>
+        <nav>
+            <ul class="menu">
+                <li>
+                    <a href="../index.html" target="_self">home</a>
+
+                </li>
+                <li>
+                    <a href="#">Calculator</a>
+                    <ul class="submenu">
+                        <li><a href="../calculator/index.html" target="_blank">Calculator</a></li>
+                        <li><a href="../bmi/index.html" target="_blank">BMI calculator</a></li>
+                        <!-- 다른 유틸리티 관련 링크 추가 가능 -->
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Etc Category</a>
+                    <ul class="submenu">
+                        <li><a href="../notepad/index.html" target="_blank">Notepad</a></li>
+                        <!-- 다른 기타 관련 링크 추가 가능 -->
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="converter">
+        <h2>Real-time Currency Converter</h2>
+        <div class="input-fields">
+            <div class="amount-input">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" min="0">
+            </div>
+            <div class="currency-from">
+                <label for="fromCurrency">From:</label>
+                <select id="fromCurrency">
+                    <option value="USD">USD</option>
+                    <option value="KRW">KRW</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CNY">CNY</option>
+                    <option value="EUR">EUR</option>
+                    <!-- Add more currency options here -->
+                </select>
+            </div>
+            <div class="currency-to">
+                <label for="toCurrency">To:</label>
+                <select id="toCurrency">
+                    <option value="USD">USD</option>
+                    <option value="KRW">KRW</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CNY">CNY</option>
+                    <option value="EUR">EUR</option>
+                    <!-- Add more currency options here -->
+                </select>
+            </div>
+        </div>
+        <button id="convertButton">Convert</button>
+        <div id="result" class="result"></div>
+    </div>
+</body>
+</html>
