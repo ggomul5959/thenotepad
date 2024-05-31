@@ -1,0 +1,148 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 20px 10%;
+    background-color: #444; 
+    color: white;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu > li {
+    position: relative;
+    margin: 0 15px;
+}
+
+.menu > li > a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    display: block;
+}
+
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #555;
+}
+
+.submenu > li > a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+
+.submenu > li > a:hover {
+    background-color: #666;
+}
+
+/* Show the dropdown menu */
+.menu > li:hover .submenu {
+    display: block;
+}
+
+.container {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    top: 20%;
+    transform: translateY(30%);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-select .search {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.custom-select .select-items {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    width: 100%;
+    z-index: 1;
+}
+
+.custom-select .select-items div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.custom-select .select-items div:hover {
+    background-color: #ddd;
+}
+
+button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
