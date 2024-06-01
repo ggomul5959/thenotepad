@@ -6,8 +6,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const penButton = document.getElementById('penButton');
     const eraserButton = document.getElementById('eraserButton');
     const saveButton = document.getElementById('saveButton');
+    const confirmSaveButton = document.getElementById('confirmSaveButton');
+    const fileNameInput = document.getElementById('fileNameInput');
     const penSizeInput = document.getElementById('penSize');
     const eraserSizeInput = document.getElementById('eraserSize');
+    const popup = document.getElementById('fileNamePopup');
+    const closeBtn = document.querySelector('.close-btn');
     const ctx = drawingCanvas.getContext('2d');
     let drawing = false;
     let selectedColor = '#000000';
@@ -55,10 +59,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     saveButton.addEventListener('click', () => {
+        popup.style.display = 'flex';
+    });
+
+    confirmSaveButton.addEventListener('click', () => {
+        const fileName = fileNameInput.value || 'drawing';
         const link = document.createElement('a');
-        link.download = 'drawing.png';
+        link.download = `${fileName}.png`;
         link.href = drawingCanvas.toDataURL();
         link.click();
+        popup.style.display = 'none';
+        fileNameInput.value = '';  // Clear the input after saving
+    });
+
+    closeBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
     });
 
     penSizeInput.addEventListener('input', (event) => {
@@ -88,14 +103,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             ctx.lineWidth = eraserMode ? eraserSize : penSize;
             ctx.lineCap = 'round';
             ctx.strokeStyle = eraserMode ? '#FFFFFF' : selectedColor;
-
             ctx.lineTo(x, y);
             ctx.stroke();
             ctx.beginPath();
             ctx.moveTo(x, y);
         }
 
-        drawCursor(x, y);  // 마우스 이동 시마다 커서도 그리기
+        drawCursor(x, y);  // 커서를 업데이트
     };
 
     const startResizing = (event) => {
@@ -125,10 +139,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     window.addEventListener('mousemove', resize);
     window.addEventListener('mouseup', stopResizing);
 
-    drawingCanvas.addEventListener('mouseleave', () => {
-        cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
-    });
-
     // Initialize pen button as active
     penButton.classList.add('active');
 });
+
