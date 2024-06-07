@@ -86,3 +86,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // 초기 문의사항 목록 가져오기
     fetchQuestions();
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const questionForm = document.getElementById('questionForm');
+
+    questionForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const nickname = document.getElementById('nickname').value;
+        const password = document.getElementById('password').value;
+        const content = document.getElementById('content').value;
+
+        try {
+            const response = await fetch('/.netlify/functions/save-question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title,
+                    nickname,
+                    password,
+                    content
+                })
+            });
+
+            if (response.ok) {
+                alert('문의사항이 제출되었습니다.');
+                questionForm.reset(); // 양식 초기화
+            } else {
+                const errorMessage = await response.text();
+                alert(`문의사항 제출에 실패했습니다. 오류: ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error('문의사항 제출 중 오류 발생:', error);
+            alert('문의사항 제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+        }
+    });
+})
