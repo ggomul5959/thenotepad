@@ -95,6 +95,94 @@ section h2 {
     font-size: 1.5em;
     text-align: center;
 }
+form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input,
+form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form button {
+    padding: 10px 15px;
+    font-size: 1em;
+    color: white;
+    background-color: #444;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #555;
+}
+
+/* 문의사항 리스트 스타일 */
+#questionsList {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#questionsList li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#questionsList li button {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    color: white;
+    background-color: #444;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#questionsList li button:hover {
+    background-color: #555;
+}
+
+/* 페이지네이션 스타일 */
+#pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#pagination a {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    color: #444;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pagination a:hover {
+    background-color: #f0f0f0;
+}
 
 /* 반응형 디자인을 위한 미디어 쿼리 */
 @media (max-width: 600px) {
