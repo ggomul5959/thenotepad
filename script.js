@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 문의사항 게시판 페이지
     if (document.getElementById('questionsList')) {
         const questionsList = document.getElementById('questionsList');
         const deleteForm = document.getElementById('deleteForm');
@@ -10,10 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let adminPassword = '';
 
-        // 비밀번호를 JSON 파일에서 가져오는 함수
         const fetchAdminPassword = async () => {
             try {
-                const response = await fetch('adminPassword.json'); // 올바른 파일 경로를 지정
+                const response = await fetch('adminPassword.json');
                 const data = await response.json();
                 adminPassword = data.adminPassword;
             } catch (error) {
@@ -28,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log(data); // 응답 데이터 확인을 위해 콘솔 로그 추가
+                console.log(data);
 
                 if (!data.questions || !data.totalPages) {
                     throw new Error('Invalid response format');
@@ -46,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             questions.forEach(question => {
                 const li = document.createElement('li');
                 li.textContent = `${question.title} - ${question.nickname}`;
-                li.addEventListener('click', () => showQuestionDetail(question)); // 클릭 시 상세 내용 모달 표시
+                li.addEventListener('click', () => showQuestionDetail(question));
                 questionsList.appendChild(li);
             });
         };
@@ -83,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     body: JSON.stringify({ id: deleteQuestionIdValue }),
                     headers: {
-                        'Content-Type': 'application/json' // 요청의 Content-Type 설정
+                        'Content-Type': 'application/json'
                     }
                 });
 
@@ -99,17 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 비밀번호를 가져오고 나서 질문을 가져옵니다.
         fetchAdminPassword().then(fetchQuestions);
 
-        // 모달 닫기 버튼 이벤트 리스너 설정
         closeModalButton.addEventListener('click', closeModal);
 
-        // 모달 내에서 삭제 버튼 클릭 리스너 설정
         document.getElementById('deleteModalForm').addEventListener('submit', deleteQuestionHandler);
     }
 
-    // 문의사항 제출 페이지
     if (document.getElementById('questionForm')) {
         const questionForm = document.getElementById('questionForm');
 
@@ -150,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// 문의사항 목록에서 제목 클릭 시 상세 내용 모달 표시
 const showQuestionDetail = async (question) => {
     document.getElementById('modalTitle').textContent = question.title;
     document.getElementById('modalContent').textContent = question.content;
@@ -166,9 +159,9 @@ const deleteQuestionHandler = async (e) => {
     try {
         const response = await fetch('/.netlify/functions/delete-question', {
             method: 'POST',
-            body: JSON.stringify({ id: questionId, password: deletePassword }), // ID와 삭제 비밀번호를 함께 보내기
+            body: JSON.stringify({ id: questionId, password: deletePassword }),
             headers: {
-                'Content-Type': 'application/json' // 요청의 Content-Type 설정
+                'Content-Type': 'application/json'
             }
         });
 
@@ -177,7 +170,7 @@ const deleteQuestionHandler = async (e) => {
             if (result.success) {
                 alert('문의사항이 삭제되었습니다.');
                 fetchQuestions();
-                closeModal(); // 모달 닫기
+                closeModal();
             } else {
                 alert('문의사항 삭제에 실패했습니다.');
             }
@@ -189,7 +182,6 @@ const deleteQuestionHandler = async (e) => {
     }
 };
 
-// 모달 닫기
 const closeModal = () => {
     document.getElementById('modal').style.display = 'none';
 };
