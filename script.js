@@ -99,7 +99,10 @@ const renderQuestions = (questions) => {
             }
         });
 
-        fetchAdminPassword().then(fetchQuestions);
+        fetchAdminPassword()
+    .then(fetchQuestions)
+    .catch(error => console.error('Error fetching data:', error));
+
 
         closeModalButton.addEventListener('click', closeModal);
 
