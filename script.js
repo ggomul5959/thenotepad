@@ -32,7 +32,7 @@ const fetchQuestions = async (page = 1) => {
             throw new Error('Invalid response format');
         }
 
-        renderQuestions(data); // 변경된 부분
+        renderQuestions(data.볃ㄴ샤ㅐㅜㄴ); // 변경된 부분
         renderPagination(data.totalPages, page);
     } catch (error) {
         console.error('Error fetching questions:', error);
@@ -153,7 +153,7 @@ const renderQuestions = (questions) => {
 const showQuestionDetail = async (question) => {
     document.getElementById('modalTitle').textContent = question.title; // 수정된 부분
     document.getElementById('modalContent').textContent = question.content; // 수정된 부분
-    document.getElementById('modal').dataset.questionId = question.ref.id;  // 수정된 부분
+    document.getElementById('modal').dataset.questionId = question.id;  // 수정된 부분
     document.getElementById('modal').style.display = 'block';
 };
 const deleteQuestionHandler = async (e) => {
