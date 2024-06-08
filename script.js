@@ -39,20 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const renderQuestions = (questions) => {
-            questionsList.innerHTML = '';
-            questions.forEach(question => {
-                // 데이터 구조 확인 후 올바르게 참조
-                const title = question.data?.title;
-                const nickname = question.data?.nickname;
-                if (title && nickname) {
-                    const li = document.createElement('li');
-                    li.textContent = `${title} - ${nickname}`;
-                    li.addEventListener('click', () => showQuestionDetail(question));
-                    questionsList.appendChild(li);
-                }
-            });
-        };
+const renderQuestions = (questions) => {
+    questionsList.innerHTML = '';
+    questions.forEach(question => {
+        const title = question.data.title;
+        const nickname = question.data.nickname;
+        const li = document.createElement('li');
+        li.textContent = `${title} - ${nickname}`;
+        li.addEventListener('click', () => showQuestionDetail(question));
+        questionsList.appendChild(li);
+    });
+};
+
 
         const renderPagination = (totalPages, currentPage) => {
             const pagination = document.getElementById('pagination');
