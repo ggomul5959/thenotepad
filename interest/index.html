@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-5748042614242481">
     <meta name="description" content="Notepad는 간단하고 효율적인 이자 계산기 입니다. 원금과 이자율을 계산하여 이자를 계산합니다.">
-    <meta name="keywords" content="Notepad, 메모장, 메모 작성, 텍스트 에디터, 텍스트 저장">
+    <meta name="keywords" content="이자, 이자율, 이자 계산">
     <title>Interest Calculator</title>
     <link rel="stylesheet" href="style.css">
     <script src="scripts.js" defer></script>
@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <h1>My Toolbar</h1>
+        <h1>이자 계산기</h1>
          <nav>
               <ul class="menu">
                 <li>
@@ -23,10 +23,10 @@
             <li>
                 <a href="#">Calculator</a>
                 <ul class="submenu">
-                    <li><a href="../calculator/index.html" target="_blank">Calculator</a></li>
-                    <li><a href="../bmi/index.html" target="_blank">BMI calculator</a></li>
-                    <li><a href="../Currency/index.html" target="_blank">Currency calculator</a></li>
-                    <li><a href="../interest/index.html" target="_blank">Interest calculator</a></li>
+                    <li><a href="../calculator/index.html" target="_blank">계산기</a></li>
+                    <li><a href="../bmi/index.html" target="_blank">BMI 계산기</a></li>
+                    <li><a href="../Currency/index.html" target="_blank">팁 계산기</a></li>
+                    <li><a href="../interest/index.html" target="_blank">이자 계산기</a></li>
                     <!-- 다른 유틸리티 관련 링크 추가 가능 -->
                 </ul>
             </li>
@@ -34,7 +34,7 @@
                 <a href="#">Etc Category</a>
                 <ul class="submenu">
                     <li><a href="../notepad/index.html" target="_blank">Notepad</a></li>
-                    <li><a href="../time/index.html" target="_blank">Time Zone Converter</a></li>
+                    <li><a href="../time/index.html" target="_blank">시간대 변환기</a></li>
                     <li><a href="../color/index.html" target="_blank">colorPicker</a></li>
                     <!-- 다른 기타 관련 링크 추가 가능 -->
                 </ul>
@@ -44,13 +44,13 @@
 </header>
     <div class="container">
         <form id="interest-form">
-            <label for="principal">Principal:</label>
+            <label for="principal">금액:</label>
             <input type="number" id="principal" required>
             
-            <label for="rate">Annual Interest Rate (%):</label>
+            <label for="rate">연간 이자율 (%):</label>
             <input type="number" id="rate" step="0.01" required>
             
-            <label for="time">Time (years):</label>
+            <label for="time">기간 (years):</label>
             <input type="number" id="time" required>
             
             <div>
