@@ -187,7 +187,6 @@ const deleteQuestionHandler = async (e) => {
         console.error('Error deleting question:', error);
     }
 };
-
 const closeModal = () => {
     document.getElementById('modal').style.display = 'none';
 };
