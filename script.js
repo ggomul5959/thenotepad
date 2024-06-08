@@ -19,51 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const fetchQuestions = async (page = 1) => {
-            try {
-                const response = await fetch(`/.netlify/functions/get-questions?page=${page}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP 오류! 상태: ${response.status}`);
-                }
-                const data = await response.json();
-
-                if (!data || !data.questions || !Array.isArray(data.questions)) {
-                    throw new Error('유효하지 않은 응답 형식');
-                }
-
-                renderQuestions(data.questions); 
-                renderPagination(data.totalPages, page);
-            } catch (error) {
-                console.error('문의사항을 가져오는 중 오류 발생:', error);
-            }
-        };
-
-        const renderQuestions = (questions) => {
-            questionsList.innerHTML = '';
-            questions.forEach(question => {
-                const li = document.createElement('li');
-                li.textContent = question.title;
-                li.addEventListener('click', () => showQuestionDetail(question));
-                questionsList.appendChild(li);
-            });
-        };
-
-        const renderPagination = (totalPages, currentPage) => {
-            const pagination = document.getElementById('pagination');
-            pagination.innerHTML = '';
-
-            for (let i = 1; i <= totalPages; i++) {
-                const pageLink = document.createElement('a');
-                pageLink.textContent = i;
-                pageLink.href = '#';
-                pageLink.addEventListener('click', () => fetchQuestions(i));
-                if (i === currentPage) {
-                    pageLink.style.fontWeight = 'bold';
-                }
-                pagination.appendChild(pageLink);
-            }
-        };
-
         const showQuestionDetail = async (question) => {
             const modalTitle = document.getElementById('modalTitle');
             const modalContent = document.getElementById('modalContent');
