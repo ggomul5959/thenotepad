@@ -87,11 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     deleteButton.addEventListener('click', async () => {
         const questionId = modal.dataset.questionId;
-        const deletePassword = modal.dataset.questionPassword;
+        const deletePassword = viewPasswordInput.value;  // 수정된 부분
         try {
             const response = await fetch('/.netlify/functions/delete-question', {
                 method: 'POST',
-                body: JSON.stringify({ id: questionId, password: deletePassword }),
+                body: JSON.stringify({ id: questionId, password: deletePassword }),  // 수정된 부분
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/.netlify/functions/delete-question', {
                 method: 'POST',
-                body: JSON.stringify({ id: deleteQuestionIdValue, password: adminPasswordValue }),
+                body: JSON.stringify({ id: deleteQuestionIdValue, password: adminPasswordValue }),  // 수정된 부분
                 headers: {
                     'Content-Type': 'application/json'
                 }
