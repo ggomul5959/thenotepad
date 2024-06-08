@@ -6,7 +6,7 @@ exports.handler = async (event, context) => {
         return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
-    const { id } = JSON.parse(event.body);
+    const { id, password } = JSON.parse(event.body);
 
     if (!id) {
         return { statusCode: 400, body: 'ID is required.' };
@@ -15,6 +15,7 @@ exports.handler = async (event, context) => {
     const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
 
     try {
+        // Delete the question document
         await client.query(
             q.Delete(q.Ref(q.Collection('questions'), id))
         );
