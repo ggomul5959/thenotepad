@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const showQuestionDetail = async (question) => {
     document.getElementById('modalTitle').textContent = question.title;
     document.getElementById('modalContent').textContent = question.content;
+    document.getElementById('modal').dataset.questionId = question.id; // question id를 data 속성으로 저장
     document.getElementById('modal').style.display = 'block';
 };
 
@@ -154,7 +155,7 @@ const deleteQuestionHandler = async (e) => {
     e.preventDefault();
 
     const deletePassword = document.getElementById('deletePassword').value;
-    const questionId = document.getElementById('modalTitle').textContent;
+    const questionId = document.getElementById('modal').dataset.questionId; // 저장된 question id를 가져오기
 
     try {
         const response = await fetch('/.netlify/functions/delete-question', {
