@@ -1,0 +1,17 @@
+
+{
+    "name": "toolbar",        
+    "version": "1.0.0",                  
+    "description": " project for managing questions using FaunaDB", 
+    "main": "index.js",                  
+    "scripts": {
+      "start": "node index.js",          
+      "test": "echo \"Error: no test specified\" && exit 1"  
+    },
+    "keywords": [],                      
+    "author": "dgim3005@gmail.com",               
+    "license": "ISC",                   
+    "dependencies": {
+        "faunadb": "^7.0.0"
+    }
+  }
