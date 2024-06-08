@@ -32,7 +32,7 @@ const fetchQuestions = async (page = 1) => {
             throw new Error('Invalid response format');
         }
 
-        renderQuestions(data.볃ㄴ샤ㅐㅜㄴ); // 변경된 부분
+        renderQuestions(data.questions); // 변경된 부분
         renderPagination(data.totalPages, page);
     } catch (error) {
         console.error('Error fetching questions:', error);
