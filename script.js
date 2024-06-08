@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const deleteForm = document.getElementById('deleteForm');
         const adminPasswordInput = document.getElementById('adminPassword');
         const deleteQuestionIdInput = document.getElementById('deleteQuestionId');
+        const modal = document.getElementById('modal');
+        const closeModalButton = document.querySelector('.close');
 
         let adminPassword = '';
 
@@ -19,35 +21,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-const fetchQuestions = async (page = 1) => {
-    try {
-        const response = await fetch(`/.netlify/functions/get-questions?page=${page}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log(data); // 응답 데이터 확인을 위해 콘솔 로그 추가
+        const fetchQuestions = async (page = 1) => {
+            try {
+                const response = await fetch(`/.netlify/functions/get-questions?page=${page}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data); // 응답 데이터 확인을 위해 콘솔 로그 추가
 
-        if (!data.questions || !data.totalPages) {
-            throw new Error('Invalid response format');
-        }
+                if (!data.questions || !data.totalPages) {
+                    throw new Error('Invalid response format');
+                }
 
-        renderQuestions(data.questions);
-        renderPagination(data.totalPages, page);
-    } catch (error) {
-        console.error('Error fetching questions:', error);
-    }
-};
+                renderQuestions(data.questions);
+                renderPagination(data.totalPages, page);
+            } catch (error) {
+                console.error('Error fetching questions:', error);
+            }
+        };
 
-const renderQuestions = (questions) => {
-    questionsList.innerHTML = '';
-    questions.forEach(question => {
-        const li = document.createElement('li');
-        li.textContent = `${question.title} - ${question.nickname}`;
-        li.addEventListener('click', () => showQuestionDetail(question)); // 클릭 시 상세 내용 모달 표시
-        questionsList.appendChild(li);
-    });
-};
+        const renderQuestions = (questions) => {
+            questionsList.innerHTML = '';
+            questions.forEach(question => {
+                const li = document.createElement('li');
+                li.textContent = `${question.title} - ${question.nickname}`;
+                li.addEventListener('click', () => showQuestionDetail(question)); // 클릭 시 상세 내용 모달 표시
+                questionsList.appendChild(li);
+            });
+        };
 
         const renderPagination = (totalPages, currentPage) => {
             const pagination = document.getElementById('pagination');
@@ -80,6 +82,9 @@ const renderQuestions = (questions) => {
                 const response = await fetch('/.netlify/functions/delete-question', {
                     method: 'POST',
                     body: JSON.stringify({ id: deleteQuestionIdValue }),
+                    headers: {
+                        'Content-Type': 'application/json' // 요청의 Content-Type 설정
+                    }
                 });
 
                 const result = await response.json();
@@ -96,6 +101,12 @@ const renderQuestions = (questions) => {
 
         // 비밀번호를 가져오고 나서 질문을 가져옵니다.
         fetchAdminPassword().then(fetchQuestions);
+
+        // 모달 닫기 버튼 이벤트 리스너 설정
+        closeModalButton.addEventListener('click', closeModal);
+
+        // 모달 내에서 삭제 버튼 클릭 리스너 설정
+        document.getElementById('deleteModalForm').addEventListener('submit', deleteQuestionHandler);
     }
 
     // 문의사항 제출 페이지
@@ -138,21 +149,19 @@ const renderQuestions = (questions) => {
         });
     }
 });
+
 // 문의사항 목록에서 제목 클릭 시 상세 내용 모달 표시
 const showQuestionDetail = async (question) => {
     document.getElementById('modalTitle').textContent = question.title;
     document.getElementById('modalContent').textContent = question.content;
     document.getElementById('modal').style.display = 'block';
-
-    // 모달 내에서 삭제 버튼 클릭 시
-    document.getElementById('deleteModalForm').addEventListener('submit', (e) => deleteQuestionHandler(e, question));
 };
 
-const deleteQuestionHandler = async (e, question) => {
+const deleteQuestionHandler = async (e) => {
     e.preventDefault();
 
     const deletePassword = document.getElementById('deletePassword').value;
-    const questionId = question.id; // 문의사항의 ID 가져오기
+    const questionId = document.getElementById('modalTitle').textContent;
 
     try {
         const response = await fetch('/.netlify/functions/delete-question', {
@@ -178,23 +187,9 @@ const deleteQuestionHandler = async (e, question) => {
     } catch (error) {
         console.error('Error deleting question:', error);
     }
-
-    // 모달 내에서 삭제 버튼 클릭 리스너 제거
-    document.getElementById('deleteModalForm').removeEventListener('submit', deleteQuestionHandler);
 };
 
 // 모달 닫기
 const closeModal = () => {
     document.getElementById('modal').style.display = 'none';
-};
-
-// 문의사항 클릭 시 상세 내용 표시
-const renderQuestions = (questions) => {
-    questionsList.innerHTML = '';
-    questions.forEach(question => {
-        const li = document.createElement('li');
-        li.textContent = `${question.title} - ${question.nickname}`;
-        li.addEventListener('click', () => showQuestionDetail(question)); // 클릭 시 상세 내용 모달 표시
-        questionsList.appendChild(li);
-    });
 };
