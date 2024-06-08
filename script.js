@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             questionsList.innerHTML = '';
             questions.forEach(question => {
                 const li = document.createElement('li');
-                li.textContent = `${question.title} - ${question.nickname}`;
+                li.textContent = `${question.data.title} - ${question.data.nickname}`;
                 li.addEventListener('click', () => showQuestionDetail(question));
                 questionsList.appendChild(li);
             });
@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const showQuestionDetail = async (question) => {
-    document.getElementById('modalTitle').textContent = question.title;
-    document.getElementById('modalContent').textContent = question.content;
+    document.getElementById('modalTitle').textContent = question.data.title;
+    document.getElementById('modalContent').textContent = question.data.content;
     document.getElementById('modal').dataset.questionId = question.ref['@ref'].id; // question ID 저장
     document.getElementById('modal').style.display = 'block';
 };
