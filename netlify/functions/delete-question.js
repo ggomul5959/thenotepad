@@ -6,7 +6,7 @@ exports.handler = async (event, context) => {
         return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
-    const { id, password } = JSON.parse(event.body);
+    const { id } = JSON.parse(event.body);
 
     if (!id) {
         return { statusCode: 400, body: 'ID is required.' };
