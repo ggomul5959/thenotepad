@@ -87,10 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     deleteButton.addEventListener('click', async () => {
         const questionId = modal.dataset.questionId;
+        const deletePassword = modal.dataset.questionPassword;
         try {
             const response = await fetch('/.netlify/functions/delete-question', {
                 method: 'POST',
-                body: JSON.stringify({ id: questionId }),
+                body: JSON.stringify({ id: questionId, password: deletePassword }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchQuestions();
                 closeModal();
             } else {
-                alert('문의사항 삭제에 실패했습니다.');
+                alert(`문의사항 삭제에 실패했습니다. 오류: ${result.error}`);
             }
         } catch (error) {
             console.error('Error deleting question:', error);
@@ -119,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/.netlify/functions/delete-question', {
                 method: 'POST',
-                body: JSON.stringify({ id: deleteQuestionIdValue }),
+                body: JSON.stringify({ id: deleteQuestionIdValue, password: adminPasswordValue }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('문의사항이 삭제되었습니다.');
                 fetchQuestions();
             } else {
-                alert('문의사항 삭제에 실패했습니다.');
+                alert(`문의사항 삭제에 실패했습니다. 오류: ${result.error}`);
             }
         } catch (error) {
             console.error('Error deleting question:', error);
