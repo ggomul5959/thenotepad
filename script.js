@@ -41,16 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const renderQuestions = (questions) => {
     questionsList.innerHTML = '';
-    questions.forEach(questions => {
-        const title = questions.data.title;
-        const nickname = questions.data.nickname;
+    questions.forEach(question => {
+        const title = question.title; // 수정된 부분
+        const nickname = question.nickname; // 수정된 부분
         const li = document.createElement('li');
         li.textContent = `${title} - ${nickname}`;
         li.addEventListener('click', () => showQuestionDetail(question));
         questionsList.appendChild(li);
     });
 };
-
 
         const renderPagination = (totalPages, currentPage) => {
             const pagination = document.getElementById('pagination');
@@ -148,12 +147,11 @@ const renderQuestions = (questions) => {
 });
 
 const showQuestionDetail = async (question) => {
-    document.getElementById('modalTitle').textContent = question.data.title;
-    document.getElementById('modalContent').textContent = question.data.content;
-    document.getElementById('modal').dataset.questionId = question.ref['@ref'].id;  // question ID 저장
+    document.getElementById('modalTitle').textContent = question.title; // 수정된 부분
+    document.getElementById('modalContent').textContent = question.content; // 수정된 부분
+    document.getElementById('modal').dataset.questionId = question.ref.id;  // 수정된 부분
     document.getElementById('modal').style.display = 'block';
 };
-
 const deleteQuestionHandler = async (e) => {
     e.preventDefault();
 
