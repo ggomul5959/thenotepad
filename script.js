@@ -145,35 +145,38 @@ const showQuestionDetail = async (question) => {
     document.getElementById('modal').style.display = 'block';
 
     // 모달 내에서 삭제 버튼 클릭 시
-    document.getElementById('deleteModalForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
+document.getElementById('deleteModalForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        const deletePassword = document.getElementById('deletePassword').value;
+    const deletePassword = document.getElementById('deletePassword').value;
 
-        // 비밀번호 확인
-        if (deletePassword !== question.password && deletePassword !== adminPassword) {
-            alert('비밀번호가 일치하지 않습니다.');
-            return;
+    // 문의사항의 ID와 삭제 비밀번호를 가져오기
+    const questionId = question.id;
+    const requestBody = { password: deletePassword }; // 삭제 요청에 필요한 데이터
+
+    // 관리자 비밀번호인 경우, 요청에 ID 필드 추가
+    if (deletePassword === adminPassword) {
+        requestBody.id = questionId;
+    }
+
+    try {
+        const response = await fetch('/.netlify/functions/delete-question', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert('문의사항이 삭제되었습니다.');
+            fetchQuestions();
+            closeModal(); // 모달 닫기
+        } else {
+            alert('문의사항 삭제에 실패했습니다.');
         }
-
-        try {
-            const response = await fetch('/.netlify/functions/delete-question', {
-                method: 'POST',
-                body: JSON.stringify({ id: question.id }),
-            });
-
-            const result = await response.json();
-            if (result.success) {
-                alert('문의사항이 삭제되었습니다.');
-                fetchQuestions();
-                closeModal(); // 모달 닫기
-            } else {
-                alert('문의사항 삭제에 실패했습니다.');
-            }
-        } catch (error) {
-            console.error('Error deleting question:', error);
-        }
-    });
+    } catch (error) {
+        console.error('Error deleting question:', error);
+    }
+});
 };
 
 // 모달 닫기
