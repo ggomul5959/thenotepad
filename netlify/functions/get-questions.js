@@ -4,7 +4,6 @@ const q = faunadb.query;
 exports.handler = async (event, context) => {
     const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
 
-    // 쿼리 파라미터에서 페이지 번호를 읽습니다.
     const page = parseInt(event.queryStringParameters.page) || 1;
     const pageSize = 10; // 페이지당 항목 수
     const startIndex = (page - 1) * pageSize;
@@ -18,7 +17,6 @@ exports.handler = async (event, context) => {
         );
         const questions = response.data.map(item => item.data);
 
-        // 총 질문 수를 가져옵니다.
         const totalResponse = await client.query(
             q.Count(q.Match(q.Index('all_questions')))
         );
