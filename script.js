@@ -19,25 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const fetchQuestions = async (page = 1) => {
-            try {
-                const response = await fetch(`/.netlify/functions/get-questions?page=${page}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                console.log(data);  // 데이터 구조 확인을 위해 콘솔에 출력
+const fetchQuestions = async (page = 1) => {
+    try {
+        const response = await fetch(`/.netlify/functions/get-questions?page=${page}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);  // 데이터 구조 확인을 위해 콘솔에 출력
 
-                if (!data.questions || !data.totalPages) {
-                    throw new Error('Invalid response format');
-                }
+        if (!data || !Array.isArray(data)) {
+            throw new Error('Invalid response format');
+        }
 
-                renderQuestions(data.questions);
-                renderPagination(data.totalPages, page);
-            } catch (error) {
-                console.error('Error fetching questions:', error);
-            }
-        };
+        renderQuestions(data); // 변경된 부분
+        renderPagination(data.totalPages, page);
+    } catch (error) {
+        console.error('Error fetching questions:', error);
+    }
+};
+
 
 const renderQuestions = (questions) => {
     questionsList.innerHTML = '';
