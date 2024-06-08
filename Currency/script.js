@@ -1,8 +1,8 @@
 var tipsByType = {
-    'Excellent': [],
-    'Good': [],
-    'Fair': [],
-    'Poor': []
+    '매우 만족': [],
+    '만족': [],
+    '보통': [],
+    '불만족': []
 };
 
 function calculateTip() {
@@ -22,8 +22,8 @@ function calculateTip() {
 
     var averageTip = calculateAverageTip(tipsByType[tipType]);
 
-    document.getElementById("tipAmount").innerHTML = "Tip: $" + tipAmount.toFixed(2) + "<br>Total Amount: $" + totalAmount.toFixed(2);
-    document.getElementById("averageTip").innerHTML = tipType + " Average Tip: " + averageTip.toFixed(2) + "%";
+    document.getElementById("팁 금액").innerHTML = "Tip: $" + tipAmount.toFixed(2) + "<br>Total Amount: $" + totalAmount.toFixed(2);
+    document.getElementById("평균 팁").innerHTML = tipType + " Average Tip: " + averageTip.toFixed(2) + "%";
 }
 
 function calculateAverageTip(tipArray) {
