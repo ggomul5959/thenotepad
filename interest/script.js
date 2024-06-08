@@ -20,5 +20,5 @@ function calculateInterest() {
     }
 
     document.getElementById('result').innerHTML = 
-        `이자액: ${interest.toFixed(2)}<br>총액: ${totalAmount.toFixed(2)}`;
+        `이자금: ${interest.toFixed(2)}<br>총액: ${totalAmount.toFixed(2)}`;
 }
