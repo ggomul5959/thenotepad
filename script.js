@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const renderQuestions = (questions) => {
     questionsList.innerHTML = '';
-    questions.forEach(question => {
-        const title = question.data.title;
-        const nickname = question.data.nickname;
+    questions.forEach(questions => {
+        const title = questions.data.title;
+        const nickname = questions.data.nickname;
         const li = document.createElement('li');
         li.textContent = `${title} - ${nickname}`;
         li.addEventListener('click', () => showQuestionDetail(question));
