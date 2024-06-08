@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
         const questionDoc = await client.query(
             q.Get(q.Ref(q.Collection('questions'), id))
         );
-        
+
         // Verify the password
         if (questionDoc.data.password !== password) {
             return { statusCode: 401, body: JSON.stringify({ success: false, error: 'Incorrect password' }) };
