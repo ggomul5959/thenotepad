@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log(data);
+                console.log(data);  // 데이터 구조 확인을 위해 콘솔에 출력
 
                 if (!data.questions || !data.totalPages) {
                     throw new Error('Invalid response format');
@@ -42,10 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const renderQuestions = (questions) => {
             questionsList.innerHTML = '';
             questions.forEach(question => {
-                const li = document.createElement('li');
-                li.textContent = `${question.data.title} - ${question.data.nickname}`;
-                li.addEventListener('click', () => showQuestionDetail(question));
-                questionsList.appendChild(li);
+                // 데이터 구조 확인 후 올바르게 참조
+                const title = question.data?.title;
+                const nickname = question.data?.nickname;
+                if (title && nickname) {
+                    const li = document.createElement('li');
+                    li.textContent = `${title} - ${nickname}`;
+                    li.addEventListener('click', () => showQuestionDetail(question));
+                    questionsList.appendChild(li);
+                }
             });
         };
 
@@ -147,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const showQuestionDetail = async (question) => {
     document.getElementById('modalTitle').textContent = question.data.title;
     document.getElementById('modalContent').textContent = question.data.content;
-    document.getElementById('modal').dataset.questionId = question.ref['@ref'].id; // question ID 저장
+    document.getElementById('modal').dataset.questionId = question.ref['@ref'].id;  // question ID 저장
     document.getElementById('modal').style.display = 'block';
 };
 
@@ -155,7 +160,7 @@ const deleteQuestionHandler = async (e) => {
     e.preventDefault();
 
     const deletePassword = document.getElementById('deletePassword').value;
-    const questionId = document.getElementById('modal').dataset.questionId; // 저장된 question ID 사용
+    const questionId = document.getElementById('modal').dataset.questionId;  // 저장된 question ID 사용
 
     try {
         const response = await fetch('/.netlify/functions/delete-question', {
