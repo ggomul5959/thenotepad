@@ -44,10 +44,10 @@ const renderQuestions = (questions) => {
     questions.forEach(question => {
         const li = document.createElement('li');
         li.textContent = `${question.title} - ${question.nickname}`;
+        li.addEventListener('click', () => showQuestionDetail(question)); // 클릭 시 상세 내용 모달 표시
         questionsList.appendChild(li);
     });
 };
-        
 
         const renderPagination = (totalPages, currentPage) => {
             const pagination = document.getElementById('pagination');
