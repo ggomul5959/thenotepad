@@ -149,29 +149,28 @@ document.getElementById('deleteModalForm').addEventListener('submit', async (e) 
     e.preventDefault();
 
     const deletePassword = document.getElementById('deletePassword').value;
-
-    // 문의사항의 ID와 삭제 비밀번호를 가져오기
-    const questionId = question.id;
-    const requestBody = { password: deletePassword }; // 삭제 요청에 필요한 데이터
-
-    // 관리자 비밀번호인 경우, 요청에 ID 필드 추가
-    if (deletePassword === adminPassword) {
-        requestBody.id = questionId;
-    }
+    const questionId = question.id; // 문의사항의 ID 가져오기
 
     try {
         const response = await fetch('/.netlify/functions/delete-question', {
             method: 'POST',
-            body: JSON.stringify(requestBody),
+            body: JSON.stringify({ id: questionId, password: deletePassword }), // ID와 삭제 비밀번호를 함께 보내기
+            headers: {
+                'Content-Type': 'application/json' // 요청의 Content-Type 설정
+            }
         });
 
-        const result = await response.json();
-        if (result.success) {
-            alert('문의사항이 삭제되었습니다.');
-            fetchQuestions();
-            closeModal(); // 모달 닫기
+        if (response.ok) {
+            const result = await response.json();
+            if (result.success) {
+                alert('문의사항이 삭제되었습니다.');
+                fetchQuestions();
+                closeModal(); // 모달 닫기
+            } else {
+                alert('문의사항 삭제에 실패했습니다.');
+            }
         } else {
-            alert('문의사항 삭제에 실패했습니다.');
+            console.error('Failed to delete question. Status:', response.status);
         }
     } catch (error) {
         console.error('Error deleting question:', error);
