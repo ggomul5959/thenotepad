@@ -15,42 +15,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 adminPassword = data.adminPassword;
             } catch (error) {
-                console.error('Error fetching admin password:', error);
+                console.error('관리자 비밀번호를 가져오는 중 오류 발생:', error);
             }
         };
 
-const fetchQuestions = async (page = 1) => {
-    try {
-        const response = await fetch(`/.netlify/functions/get-questions?page=${page}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log(data);  // 데이터 구조 확인을 위해 콘솔에 출력
+        const fetchQuestions = async (page = 1) => {
+            try {
+                const response = await fetch(`/.netlify/functions/get-questions?page=${page}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP 오류! 상태: ${response.status}`);
+                }
+                const data = await response.json();
 
-        if (!data || !data.questions || !Array.isArray(data.questions)) {
-            throw new Error('Invalid response format');
-        }
+                if (!data || !data.questions || !Array.isArray(data.questions)) {
+                    throw new Error('유효하지 않은 응답 형식');
+                }
 
-        renderQuestions(data.questions); 
-        renderPagination(data.totalPages, page);
-    } catch (error) {
-        console.error('Error fetching questions:', error);
-    }
-};
+                renderQuestions(data.questions); 
+                renderPagination(data.totalPages, page);
+            } catch (error) {
+                console.error('문의사항을 가져오는 중 오류 발생:', error);
+            }
+        };
 
-
-const renderQuestions = (questions) => {
-    questionsList.innerHTML = '';
-    questions.forEach(question => {
-        const title = question.title; // 수정된 부분
-        const nickname = question.nickname; // 수정된 부분
-        const li = document.createElement('li');
-        li.textContent = `${title} - ${nickname}`;
-        li.addEventListener('click', () => showQuestionDetail(question));
-        questionsList.appendChild(li);
-    });
-};
+        const renderQuestions = (questions) => {
+            questionsList.innerHTML = '';
+            questions.forEach(question => {
+                const li = document.createElement('li');
+                li.textContent = question.title;
+                li.addEventListener('click', () => showQuestionDetail(question));
+                questionsList.appendChild(li);
+            });
+        };
 
         const renderPagination = (totalPages, currentPage) => {
             const pagination = document.getElementById('pagination');
@@ -68,46 +64,90 @@ const renderQuestions = (questions) => {
             }
         };
 
-        deleteForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+        const showQuestionDetail = async (question) => {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const passwordForm = document.getElementById('passwordForm');
 
-            const adminPasswordValue = adminPasswordInput.value;
-            const deleteQuestionIdValue = deleteQuestionIdInput.value;
+            modalTitle.textContent = question.title;
+            modalContent.textContent = "비밀번호를 입력하세요:";
+            passwordForm.innerHTML = `
+                <label for="userPassword">비밀번호:</label>
+                <input type="password" id="userPassword" required>
+                <button id="confirmPasswordBtn">확인</button>
+            `;
 
-            if (adminPasswordValue !== adminPassword) {
-                alert('관리자 비밀번호가 틀립니다.');
-                return;
-            }
+            modal.style.display = 'block';
+
+            const confirmPasswordBtn = document.getElementById('confirmPasswordBtn');
+
+            confirmPasswordBtn.addEventListener('click', async () => {
+                const userPassword = document.getElementById('userPassword').value;
+
+                try {
+                    const response = await fetch('/.netlify/functions/verify-password', {
+                        method: 'POST',
+                        body: JSON.stringify({ id: question.id, password: userPassword }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.success) {
+                            modalContent.textContent = question.content;
+                            const deleteBtn = document.createElement('button');
+                            deleteBtn.textContent = '삭제';
+                            deleteBtn.addEventListener('click', () => deleteQuestionHandler(question.id));
+                            modalContent.appendChild(deleteBtn);
+                        } else {
+                            modalContent.textContent = '비밀번호가 올바르지 않습니다. 다시 입력해주세요.';
+                        }
+                    } else {
+                        console.error('비밀번호 확인에 실패했습니다. 상태:', response.status);
+                    }
+                } catch (error) {
+                    console.error('비밀번호 확인 중 오류 발생:', error);
+                }
+            });
+        };
+
+        const deleteQuestionHandler = async (questionId) => {
+            const deletePassword = prompt('비밀번호를 입력하세요:');
+            if (!deletePassword) return;
 
             try {
                 const response = await fetch('/.netlify/functions/delete-question', {
                     method: 'POST',
-                    body: JSON.stringify({ id: deleteQuestionIdValue }),
+                    body: JSON.stringify({ id: questionId, password: deletePassword }),
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
 
-                const result = await response.json();
-                if (result.success) {
-                    alert('문의사항이 삭제되었습니다.');
-                    fetchQuestions();
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        alert('문의사항이 삭제되었습니다.');
+                        fetchQuestions();
+                        closeModal();
+                    } else {
+                        alert('문의사항 삭제에 실패했습니다.');
+                    }
                 } else {
-                    alert('문의사항 삭제에 실패했습니다.');
+                    console.error('질문 삭제에 실패했습니다. 상태:', response.status);
                 }
             } catch (error) {
-                console.error('Error deleting question:', error);
+                console.error('문의사항 삭제 중 오류 발생:', error);
             }
-        });
-
-        fetchAdminPassword()
-    .then(fetchQuestions)
-    .catch(error => console.error('Error fetching data:', error));
-
+        };
 
         closeModalButton.addEventListener('click', closeModal);
 
-        document.getElementById('deleteModalForm').addEventListener('submit', deleteQuestionHandler);
+        fetchAdminPassword()
+            .then(fetchQuestions)
+            .catch(error => console.error('데이터 가져오는 중 오류 발생:', error));
     }
 
     if (document.getElementById('questionForm')) {
@@ -117,8 +157,6 @@ const renderQuestions = (questions) => {
             event.preventDefault();
 
             const title = document.getElementById('title').value;
-            const nickname = document.getElementById('nickname').value;
-            const password = document.getElementById('password').value;
             const content = document.getElementById('content').value;
 
             try {
@@ -129,8 +167,6 @@ const renderQuestions = (questions) => {
                     },
                     body: JSON.stringify({
                         title,
-                        nickname,
-                        password,
                         content
                     })
                 });
@@ -150,43 +186,6 @@ const renderQuestions = (questions) => {
     }
 });
 
-const showQuestionDetail = async (question) => {
-    document.getElementById('modalTitle').textContent = question.title; // 수정된 부분
-    document.getElementById('modalContent').textContent = question.content; // 수정된 부분
-    document.getElementById('modal').dataset.questionId = question.id;  // 수정된 부분
-    document.getElementById('modal').style.display = 'block';
-};
-const deleteQuestionHandler = async (e) => {
-    e.preventDefault();
-
-    const deletePassword = document.getElementById('deletePassword').value;
-    const questionId = document.getElementById('modal').dataset.questionId;  // 저장된 question ID 사용
-
-    try {
-        const response = await fetch('/.netlify/functions/delete-question', {
-            method: 'POST',
-            body: JSON.stringify({ id: questionId, password: deletePassword }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            if (result.success) {
-                alert('문의사항이 삭제되었습니다.');
-                fetchQuestions();
-                closeModal();
-            } else {
-                alert('문의사항 삭제에 실패했습니다.');
-            }
-        } else {
-            console.error('Failed to delete question. Status:', response.status);
-        }
-    } catch (error) {
-        console.error('Error deleting question:', error);
-    }
-};
 const closeModal = () => {
     document.getElementById('modal').style.display = 'none';
 };
