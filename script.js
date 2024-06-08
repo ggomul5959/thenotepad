@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 비밀번호를 JSON 파일에서 가져오는 함수
         const fetchAdminPassword = async () => {
             try {
-                const response = await fetch('path/to/adminPassword.json'); // 올바른 파일 경로를 지정
+                const response = await fetch('adminPassword.json'); // 올바른 파일 경로를 지정
                 const data = await response.json();
                 adminPassword = data.adminPassword;
             } catch (error) {
