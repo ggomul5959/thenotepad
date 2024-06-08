@@ -145,7 +145,10 @@ const showQuestionDetail = async (question) => {
     document.getElementById('modal').style.display = 'block';
 
     // 모달 내에서 삭제 버튼 클릭 시
-document.getElementById('deleteModalForm').addEventListener('submit', async (e) => {
+    document.getElementById('deleteModalForm').addEventListener('submit', deleteQuestionHandler);
+};
+
+const deleteQuestionHandler = async (e) => {
     e.preventDefault();
 
     const deletePassword = document.getElementById('deletePassword').value;
@@ -175,7 +178,9 @@ document.getElementById('deleteModalForm').addEventListener('submit', async (e) 
     } catch (error) {
         console.error('Error deleting question:', error);
     }
-});
+
+    // 모달 내에서 삭제 버튼 클릭 리스너 제거
+    document.getElementById('deleteModalForm').removeEventListener('submit', deleteQuestionHandler);
 };
 
 // 모달 닫기
