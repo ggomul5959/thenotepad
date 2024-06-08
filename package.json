@@ -12,6 +12,6 @@
     "author": "dgim3005@gmail.com",               
     "license": "ISC",                   
     "dependencies": {
-        "faunadb": "^7.0.0"
+        "faunadb": "^4.8.0"
     }
   }
