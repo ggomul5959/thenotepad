@@ -138,4 +138,58 @@ const renderQuestions = (questions) => {
         });
     }
 });
+// 문의사항 목록에서 제목 클릭 시 상세 내용 모달 표시
+const showQuestionDetail = async (question) => {
+    document.getElementById('modalTitle').textContent = question.title;
+    document.getElementById('modalContent').textContent = question.content;
+    document.getElementById('modal').style.display = 'block';
+
+    // 모달 내에서 삭제 버튼 클릭 시
+    document.getElementById('deleteModalForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const deletePassword = document.getElementById('deletePassword').value;
+
+        // 비밀번호 확인
+        if (deletePassword !== question.password && deletePassword !== adminPassword) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        try {
+            const response = await fetch('/.netlify/functions/delete-question', {
+                method: 'POST',
+                body: JSON.stringify({ id: question.id }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('문의사항이 삭제되었습니다.');
+                fetchQuestions();
+                closeModal(); // 모달 닫기
+            } else {
+                alert('문의사항 삭제에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('Error deleting question:', error);
+        }
+    });
+};
+
+// 모달 닫기
+const closeModal = () => {
+    document.getElementById('modal').style.display = 'none';
+};
+
+// 문의사항 클릭 시 상세 내용 표시
+const renderQuestions = (questions) => {
+    questionsList.innerHTML = '';
+    questions.forEach(question => {
+        const li = document.createElement('li');
+        li.textContent = `${question.title} - ${question.nickname}`;
+        li.addEventListener('click', () => showQuestionDetail(question)); // 클릭 시 상세 내용 모달 표시
+        questionsList.appendChild(li);
+    });
+};
+
 
