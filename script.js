@@ -28,11 +28,11 @@ const fetchQuestions = async (page = 1) => {
         const data = await response.json();
         console.log(data);  // 데이터 구조 확인을 위해 콘솔에 출력
 
-        if (!data || !Array.isArray(data)) {
+        if (!data || !data.questions || !Array.isArray(data.questions)) {
             throw new Error('Invalid response format');
         }
 
-        renderQuestions(data.questions); // 변경된 부분
+        renderQuestions(data.questions); 
         renderPagination(data.totalPages, page);
     } catch (error) {
         console.error('Error fetching questions:', error);
