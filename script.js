@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewModalForm = document.getElementById('viewModalForm');
     const viewPasswordInput = document.getElementById('viewPassword');
     const modalContent = document.getElementById('modalContent');
-    const deleteRequestButton = document.getElementById('deleteRequestButton');
 
     let adminPassword = '';
 
@@ -65,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modalTitle').textContent = question.title;
         viewPasswordInput.value = '';
         modalContent.style.display = 'none';
-        deleteRequestButton.style.display = 'none';
         modalContent.textContent = question.content;
         modal.dataset.questionId = question.id;
         modal.dataset.questionPassword = question.password;
@@ -79,31 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (inputPassword === storedPassword) {
             modalContent.style.display = 'block';
-            deleteRequestButton.style.display = 'block';
         } else {
             alert('비밀번호가 틀립니다.');
-        }
-    });
-
-    deleteRequestButton.addEventListener('click', async () => {
-        const questionId = modal.dataset.questionId;
-        try {
-            const response = await fetch('/.netlify/functions/delete-request', {
-                method: 'POST',
-                body: JSON.stringify({ id: questionId }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const result = await response.json();
-            if (result.success) {
-                alert('삭제 요청이 접수되었습니다.');
-                closeModal();
-            } else {
-                alert(`삭제 요청에 실패했습니다. 오류: ${result.error}`);
-            }
-        } catch (error) {
-            console.error('Error submitting delete request:', error);
         }
     });
 
