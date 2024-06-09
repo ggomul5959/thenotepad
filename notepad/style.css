@@ -110,6 +110,7 @@ nav {
     overflow: auto;
     white-space: pre-wrap;
     margin-top: 25px;
+    z-index: -1;
 }
 
 .tarea::before {
@@ -120,6 +121,7 @@ nav {
     width: 3px;
     height: 100%;
     background: #f131318f;
+    z-index: -1;
 }
 
 .tarea::after {
@@ -129,6 +131,7 @@ nav {
     left: 0;
     width: 100%;
     height: calc(100% - 25px);
+    z-index: -1;
     background: repeating-linear-gradient(
         to bottom,
         transparent,
