@@ -1,57 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
 <url>
-  <loc>https://my-toolbar.site/</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>1.00</priority>
+<loc>https://my-toolbar.site/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>1.00</priority>
 </url>
 <url>
-  <loc>https://my-toolbar.site/calculator/</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://my-toolbar.site/calculator/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://my-toolbar.site/bmi/</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://my-toolbar.site/bmi/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://my-toolbar.site/currency/</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://my-toolbar.site/currency/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://my-toolbar.site/interest/</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://my-toolbar.site/interest/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://my-toolbar.site/notepad/</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://my-toolbar.site/margin/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://my-toolbar.site/time/</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://my-toolbar.site/notepad/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://my-toolbar.site/color/</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://my-toolbar.site/time/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://my-toolbar.site/board</loc>
-  <lastmod>2024-06-09T12:43:34+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://my-toolbar.site/color/</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
 </url>
-
-
+<url>
+<loc>https://my-toolbar.site/board</loc>
+<lastmod>2024-06-15T05:07:11+00:00</lastmod>
+<priority>0.80</priority>
+</url>
 </urlset>
